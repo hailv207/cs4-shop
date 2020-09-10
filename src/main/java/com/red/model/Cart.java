@@ -20,6 +20,10 @@ public class Cart {
     private String paymentMedthod;
     private LocalDateTime date;
 
+    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "voucer_id", referencedColumnName = "id")
+    private Voucher voucher;
+
     public Cart() {
     }
 
@@ -78,4 +82,6 @@ public class Cart {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+
+
 }

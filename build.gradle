@@ -60,4 +60,8 @@ dependencies {
     providedCompile group: 'javax.faces', name: 'javax.faces-api', version: '2.3'
 
     compile group: 'org.webjars', name: 'bootstrap', version: '4.5.2'
+
+    //Hashids
+    // https://mvnrepository.com/artifact/systems.fehn/hashids-spring-boot-starter
+    compile group: 'systems.fehn', name: 'hashids-spring-boot-starter', version: '1.2.0'
 }
