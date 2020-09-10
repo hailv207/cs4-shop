@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{categorymanager.title}">Create Product</title>
+</head>
+<body>
+<h1 th:text="#{categorymanager.add}"></h1>
+<p>
+    <a href="/admin/categories" th:text="#{categorymanager.list}"></a>
+</p>
+<form th:action="@{/admin/create-category}" th:object="${category}" method="post">
+    <table>
+        <tr>
+            <td th:text="#{categorymanager.name}">:</td>
+            <td><input type="text" name="name" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{categorymanager.description}">:</td>
+            <td><input type="text" name="age" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" th:value="#{categorymanager.create}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

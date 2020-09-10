@@ -2,43 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{productmanager.title}">Create Product</title>
+    <title th:text="#{productmanager.delete.title}"></title>
 </head>
 <body>
-<h1 th:text="#{productmanager.edit.title}"></h1>
+<h1 th:text="#{productmanager.delete.title}"></h1>
 <p>
     <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
 </p>
-<form th:action="@{/admin/create-product}" th:object="${product}" method="post">
+<form th:action="@{/admin/delete-product}" th:object="${product}" method="post">
     <table>
         <input hidden type="text" name="id" th:field="*{id}">
         <tr>
             <td th:text="#{productmanager.productname}">:</td>
-            <td><input type="text" name="name" th:field="*{name}"/></td>
+            <td><input disabled type="text" name="name" th:field="*{name}"/></td>
         </tr>
         <tr>
             <td th:text="#{productmanager.productprice}">:</td>
-            <td><input type="text" name="age" th:field="*{price}"/></td>
+            <td><input disabled type="text" name="age" th:field="*{price}"/></td>
         </tr>
         <tr>
             <td th:text="#{productmanager.productquantity}">:</td>
-            <td><input type="text" name="age" th:field="*{quantity}"/></td>
+            <td><input disabled type="text" name="age" th:field="*{quantity}"/></td>
         </tr>
         <tr>
             <td th:text="#{productmanager.productdescription}">:</td>
-            <td><input type="text" name="age" th:field="*{description}"/></td>
+            <td><input disabled type="text" name="age" th:field="*{description}"/></td>
         </tr>
         <tr>
             <td th:text="#{productmanager.productcategory}">:</td>
             <td>
-                <select th:field="*{category}">
+                <select disabled th:field="*{category}">
                     <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" th:value="#{productmanager.edit}"></td>
+            <td><input type="submit" th:value="#{productmanager.delete}"></td>
         </tr>
     </table>
 </form>
