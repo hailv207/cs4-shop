@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--    FontAwesome Glyphicon-->
+    <script src="https://kit.fontawesome.com/dffada201a.js" crossorigin="anonymous"></script>
+    <title th:text="#{productmanager.title}"></title>
+</head>
+<body>
+<div class="container-xl">
+    <div class="container-fluid">
+        <a class="btn btn-primary" th:href="@{admin/addproduct}" th:text="#{productmanager.addnewproduct}"></a>
+    </div>
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            <tr>
+                <th th:text="#{productmanager.productid}"></th>
+                <th th:text="#{productmanager.productname}"></th>
+                <th th:text="#{productmanager.productcategory}"></th>
+                <th th:text="#{productmanager.productprice}"></th>
+                <th th:text="#{productmanager.productquantity}"></th>
+                <th th:text="#{productmanager.productdescription}"></th>
+                <th th:text="#{productmanager.edit}"></th>
+                <th th:text="#{productmanager.delete}"></th>
+            </tr>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.getId()}"></td>
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getCategory()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.getQuantity()}"></td>
+                <td th:text="${product.getDescription()}"></td>
+                <td><a class="btn btn-warning" th:href="@{admin/{id}/edit(id=${product.getId()})}"></a></td>
+                <td><a class="btn btn-danger" th:href="@{admin/{id}/delete(id=${product.getId()})}"></a></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+</html>

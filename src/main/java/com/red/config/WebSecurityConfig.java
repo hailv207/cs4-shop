@@ -80,6 +80,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .authorizeRequests()
+                .antMatchers("/admin/**", "/api/admin/**")
+                .hasAnyRole("ADMIN")
+                .and()
             .authorizeRequests()
                 .antMatchers("/profile/**", "/api/profile/**")
                 .hasAnyRole("ADMIN", "USER")

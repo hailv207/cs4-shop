@@ -17,11 +17,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping({"/", "/home"})
-    ModelAndView showAllProducts() {
-        ModelAndView modelAndView = new ModelAndView("home");
-        Iterable<Product> products = productService.findAll();
-        modelAndView.addObject("products", products);
-        return modelAndView;
-    }
+//    @GetMapping({})
+//    ModelAndView showAllProducts() {
+//        ModelAndView modelAndView = new ModelAndView("home");
+//        Iterable<Product> products = productService.findAll();
+//        modelAndView.addObject("products", products);
+//        return modelAndView;
+//    }
 }

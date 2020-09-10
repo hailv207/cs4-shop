@@ -19,7 +19,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasenames(
-                "i18n/auth"
+                "i18n/auth",
+                "i18n/admin"
         );
         source.setDefaultEncoding("UTF-8");
         return source;
