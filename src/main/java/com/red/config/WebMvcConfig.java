@@ -1,5 +1,6 @@
 package com.red.config;
 
+import org.hashids.Hashids;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +17,17 @@ import java.util.Locale;
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
+    public Hashids hashids(){
+        return new Hashids("V",6,"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+    }
+
+    @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasenames(
                 "i18n/auth",
-                "i18n/admin"
+                "i18n/admin",
+                "i18n/voucher"
         );
         source.setDefaultEncoding("UTF-8");
         return source;

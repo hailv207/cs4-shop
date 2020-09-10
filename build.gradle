@@ -63,6 +63,6 @@ dependencies {
 
 
     //Hashids
-    // https://mvnrepository.com/artifact/systems.fehn/hashids-spring-boot-starter
-    compile group: 'systems.fehn', name: 'hashids-spring-boot-starter', version: '1.2.0'
+    // https://mvnrepository.com/artifact/org.hashids/hashids
+    compile group: 'org.hashids', name: 'hashids', version: '1.0.3'
 }
