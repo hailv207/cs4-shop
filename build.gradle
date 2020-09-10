@@ -59,7 +59,8 @@ dependencies {
     providedCompile group: 'javax.enterprise', name: 'cdi-api', version: '2.0.SP1'
     providedCompile group: 'javax.faces', name: 'javax.faces-api', version: '2.3'
 
-    compile group: 'org.webjars', name: 'bootstrap', version: '4.5.2'
+//    compile group: 'org.webjars', name: 'bootstrap', version: '4.5.2'
+
 
     //Hashids
     // https://mvnrepository.com/artifact/systems.fehn/hashids-spring-boot-starter
