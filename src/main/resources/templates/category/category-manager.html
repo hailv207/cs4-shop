@@ -8,34 +8,28 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--    FontAwesome Glyphicon-->
     <script src="https://kit.fontawesome.com/dffada201a.js" crossorigin="anonymous"></script>
-    <title th:text="#{productmanager.title}"></title>
+    <title th:text="#{categorymanager.title}"></title>
 </head>
 <body>
 <div class="container-xl">
     <div class="container-fluid">
-        <a class="btn btn-primary" th:href="@{/admin/create-product}" th:text="#{productmanager.addnewproduct}"></a>
+        <a class="btn btn-primary" th:href="@{/admin/create-category}" th:text="#{categorymanager.add}"></a>
     </div>
     <div class="container-fluid">
         <table class="table table-bordered">
             <tr>
-                <th th:text="#{productmanager.productid}"></th>
-                <th th:text="#{productmanager.productname}"></th>
-                <th th:text="#{productmanager.productprice}"></th>
-                <th th:text="#{productmanager.productquantity}"></th>
-                <th th:text="#{productmanager.productdescription}"></th>
-                <th th:text="#{productmanager.productcategory}"></th>
+                <th th:text="#{categorymanager.id}"></th>
+                <th th:text="#{categorymanager.name}"></th>
+                <th th:text="#{categorymanager.description}"></th>
                 <th th:text="#{productmanager.edit}"></th>
                 <th th:text="#{productmanager.delete}"></th>
             </tr>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.getId()}"></td>
-                <td th:text="${product.getName()}"></td>
-                <td th:text="${product.getPrice()}"></td>
-                <td th:text="${product.getQuantity()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getCategory().getName()}"></td>
-                <td><a class="btn btn-warning" th:href="@{edit-product/{id}(id=${product.getId()})}">Edit</a></td>
-                <td><a class="btn btn-danger" th:href="@{delete-product/{id}(id=${product.getId()})}">Delete</a></td>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.getId()}"></td>
+                <td th:text="${category.getName()}"></td>
+                <td th:text="${category.getDescription()}"></td>
+                <td><a class="btn btn-warning" th:href="@{edit-category/{id}(id=${category.getId()})}">Edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{delete-category/{id}(id=${category.getId()})}">Delete</a></td>
             </tr>
         </table>
 

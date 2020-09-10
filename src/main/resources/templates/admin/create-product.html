@@ -5,13 +5,12 @@
     <title th:text="#{productmanager.title}">Create Product</title>
 </head>
 <body>
-<h1 th:text="#{productmanager.edit.title}"></h1>
+<h1 th:text="#{productmanager.addnewproduct}"></h1>
 <p>
     <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
 </p>
-<form th:action="@{/admin/create-product}" th:object="${product}" method="post">
+<form th:action="@{/admin/create-product}" method="post">
     <table>
-        <input hidden type="text" name="id" th:field="*{id}">
         <tr>
             <td th:text="#{productmanager.productname}">:</td>
             <td><input type="text" name="name" th:field="*{name}"/></td>
@@ -37,8 +36,12 @@
             </td>
         </tr>
         <tr>
+            <td th:text="#{productmanager.image}"></td>
+            <td><input type="text" name="image" th:field="*{image}"></td>
+        </tr>
+        <tr>
             <td></td>
-            <td><input type="submit" th:value="#{productmanager.edit}"></td>
+            <td><input type="submit" th:value="#{productmanager.create}"></td>
         </tr>
     </table>
 </form>
