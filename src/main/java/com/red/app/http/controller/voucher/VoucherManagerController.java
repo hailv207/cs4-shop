@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -20,9 +21,6 @@ public class VoucherManagerController {
         ModelAndView modelAndView = new ModelAndView("vouchers/home");
         Iterable<Voucher> vouchers = voucherService.findAll();
         modelAndView.addObject("vouchers", vouchers);
-        modelAndView.addObject("edit_done",null);
-        modelAndView.addObject("delete_done",null);
-        modelAndView.addObject("create_done",null);
         return modelAndView;
     }
 
@@ -37,7 +35,7 @@ public class VoucherManagerController {
     public ModelAndView createVouchers(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("vouchers/edit");
         Optional<Voucher> voucher = voucherService.findById(id);
-        modelAndView.addObject("voucher", voucher);
+        modelAndView.addObject("voucher", voucher.get());
         return modelAndView;
     }
 
@@ -45,40 +43,29 @@ public class VoucherManagerController {
     public ModelAndView deleteVouchers(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("vouchers/delete");
         Optional<Voucher> voucher = voucherService.findById(id);
-        modelAndView.addObject("voucher", voucher);
+        modelAndView.addObject("voucher", voucher.get());
         return modelAndView;
     }
 
     @PostMapping("/create")
-    public ModelAndView createVoucher(@ModelAttribute("voucher") Voucher voucher) {
+    public String createVoucher(@ModelAttribute("voucher") Voucher voucher, RedirectAttributes redirectAttributes) {
         voucherService.save(voucher);
-        ModelAndView modelAndView = new ModelAndView("vouchers/home");
-        modelAndView.addObject("create_done", true);
-        modelAndView.addObject("edit_done", null);
-        modelAndView.addObject("delete_done", null);
-        modelAndView.addObject("vouchers",voucherService.findAll());
-        return modelAndView;
+        voucherService.setCode(voucher);
+       redirectAttributes.addFlashAttribute("create_done",true);
+        return "redirect:/admin/vouchers";
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView editVoucher(@ModelAttribute("voucher") Voucher voucher) {
+    public String editVoucher(@ModelAttribute("voucher") Voucher voucher, RedirectAttributes redirectAttributes) {
         voucherService.save(voucher);
-        ModelAndView modelAndView = new ModelAndView("vouchers/home");
-        modelAndView.addObject("edit_done", true);
-        modelAndView.addObject("create_done", null);
-        modelAndView.addObject("delete_done", null);
-        modelAndView.addObject("vouchers",voucherService.findAll());
-        return modelAndView;
+        redirectAttributes.addFlashAttribute("edit_done",true);
+        return "redirect:/admin/vouchers";
     }
 
     @PostMapping("/{id}/delete")
-    public ModelAndView deleteVoucher(@PathVariable("id") Long id) {
+    public String deleteVoucher(@PathVariable("id") Long id,RedirectAttributes redirectAttributes) {
         voucherService.deleteById(id);
-        ModelAndView modelAndView = new ModelAndView("vouchers/home");
-        modelAndView.addObject("delete_done", true);
-        modelAndView.addObject("edit_done", null);
-        modelAndView.addObject("create_done", null);
-        modelAndView.addObject("vouchers",voucherService.findAll());
-        return modelAndView;
+       redirectAttributes.addFlashAttribute("delete_done",true);
+        return "redirect:/admin/vouchers";
     }
 }

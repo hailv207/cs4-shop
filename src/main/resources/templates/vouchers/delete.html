@@ -10,44 +10,33 @@
 <body>
 <section layout:fragment="content" class="container-xl mt-5">
     <h3 th:text="#{voucher.edit.title}" style="color: orange"></h3>
-    <form th:action="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})" method="post" th:object="${voucher}">
+    <form th:action="@{/admin/vouchers/{id}/delete(id=${voucher.getId()})}" method="post" th:object="${voucher}">
         <input hidden type="text" name="id" th:field="*{id}">
         <div class="form-group">
-            <label for="create" th:text="#{voucher.date}"></label>
-            <input disabled type="text" name="id" th:field="*{createdAt}" id="create">
+            <label  for="create" th:text="#{voucher.date}"></label>
+            <input class="form-control" disabled type="text" name="createdAt" th:field="*{createdAt}" id="create">
         </div>
         <div class="form-group">
             <label for="code" th:text="#{voucher.code}"></label>
-            <input disabled type="text" name="code" th:field="*{code}" id="code">
+            <input class="form-control" disabled type="text" name="code" th:field="*{code}" id="code">
         </div>
         <div class="form-group">
-            <label for="discount" th:text="#{voucher.discount}"></label>
-            <input type="text" name="code" th:field="*{discount}" id="discount">
+            <label  for="discount" th:text="#{voucher.discount}"></label>
+            <input class="form-control" disabled type="text" name="discount" th:field="*{discount}" id="discount">
         </div>
         <div class="form-group">
             <label for="campaign" th:text="#{voucher.campaign}"></label>
-            <input disabled type="text" name="code" th:field="*{campaign}" id="campaign">
+            <input class="form-control" disabled type="text" name="campaign" th:field="*{campaign}" id="campaign">
         </div>
         <div class="form-group">
-            <label for="description" th:text="#{voucher.code}"></label>
-            <input disabled type="text" name="code" th:field="*{code}" id="description">
+            <label  for="description" th:text="#{voucher.description}"></label>
+            <input class="form-control" disabled type="text" name="description" th:field="*{description}" id="description">
         </div>
         <div>
-            <input type="submit" class="btn btn-danger" th:text="#{voucher.delete}">
+            <input type="submit" class="btn btn-danger" th:value="#{voucher.delete}">
         </div>
     </form>
 </section>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
 </body>
 </html>
