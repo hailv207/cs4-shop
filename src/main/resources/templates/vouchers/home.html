@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorator="layout_admin.html">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,8 @@ layout:decorator="layout_admin.html">
 <body>
 <section layout:fragment="content" class="container-xl mt-5">
     <div>
-        <a th:href="@{/admin/vouchers/create}" class="btn btn-primary" th:text="#{voucher.create}" style="margin-bottom: 15px"></a>
+        <a th:href="@{/admin/vouchers/create}" class="btn btn-primary" th:text="#{voucher.create}"
+           style="margin-bottom: 15px"></a>
     </div>
     <div>
         <table class="table table-bordered">

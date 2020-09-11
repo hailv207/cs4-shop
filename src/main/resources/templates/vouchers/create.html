@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +13,7 @@
     <title th:text="#{voucher.create.title}"></title>
 </head>
 <body>
-<div class="container-xl">
+<section layout:fragment="content" class="container-xl mt-5">
     <h3 th:text="#{voucher.create.title}" style="color: #0a5eff"></h3>
     <form th:action="@{/admin/vouchers/create}" th:object="${voucher}" method="post">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -31,7 +33,7 @@
             <input type="submit" class="btn btn-primary" th:value="#{voucher.create}">
         </div>
     </form>
-</div>
+</section>
 
 
 <!-- Optional JavaScript -->

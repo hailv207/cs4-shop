@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +13,7 @@
     <title th:text="#{voucher.delete.title}"></title>
 </head>
 <body>
-<div class="container-xl">
+<section layout:fragment="content" class="container-xl mt-5">
     <h3 th:text="#{voucher.edit.title}" style="color: orange"></h3>
     <form th:action="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})" method="post" th:object="${voucher}">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -39,7 +41,7 @@
             <input type="submit" class="btn btn-danger" th:text="#{voucher.delete}">
         </div>
     </form>
-</div>
+</section>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
