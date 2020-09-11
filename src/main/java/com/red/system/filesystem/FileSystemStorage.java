@@ -33,13 +33,17 @@ public class FileSystemStorage implements Storage {
      */
     public Path getPath(String pathString) {
         Path path = Paths.get(pathString);
-        makeDirectory(path);
+        if (!path.getParent().toFile().exists()) {
+            makeDirectory(path);
+        }
         return path;
     }
 
     public Path getPath(String filename, String pathString) {
         Path path = Paths.get(pathString);
-        makeDirectory(path);
+        if (!path.toFile().exists()) {
+            makeDirectory(path);
+        }
         path = Paths.get(path.toString() + "/" + filename);
         return path;
     }
@@ -102,7 +106,7 @@ public class FileSystemStorage implements Storage {
     @Override
     public boolean exists(String filename) {
         checkPath(filename);
-        Path file = getPath(filename);
+        Path file = Paths.get(filename);
         try {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {

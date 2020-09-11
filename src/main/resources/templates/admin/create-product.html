@@ -1,49 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{productmanager.title}">Create Product</title>
+    <title th:text="#{productmanager.title}"></title>
 </head>
 <body>
-<h1 th:text="#{productmanager.addnewproduct}"></h1>
-<p>
-    <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
-</p>
-<form th:action="@{/admin/create-product}" th:object="${product}" method="post">
-    <table>
-        <tr>
-            <td th:text="#{productmanager.productname}">:</td>
-            <td><input type="text" name="name" th:field="*{name}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productprice}">:</td>
-            <td><input type="text" name="age" th:field="*{price}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productquantity}">:</td>
-            <td><input type="text" name="age" th:field="*{quantity}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productdescription}">:</td>
-            <td><input type="text" name="age" th:field="*{description}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productcategory}">:</td>
-            <td>
-                <select th:field="*{category}">
-                    <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
-                </select>
-            </td>
-        </tr>
-<!--        <tr>-->
-<!--            <td th:text="#{productmanager.image}"></td>-->
-<!--            <td><input type="text" name="image" th:field="*{image}"></td>-->
-<!--        </tr>-->
-        <tr>
-            <td></td>
-            <td><input type="submit" th:value="#{productmanager.create}"></td>
-        </tr>
-    </table>
-</form>
+<section layout:fragment="content" class="container-xl mt-5">
+    <h3 th:text="#{productmanager.addnewproduct}" style="color: deepskyblue"></h3>
+    <form th:action="@{/admin/create-product}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name" th:text="#{productmanager.productname}"></label>
+            <input class="form-control" type="text" name="name" id="name" th:field="*{name}" required/>
+        </div>
+        <div class="form-group">
+            <label for="price" th:text="#{productmanager.productprice}"></label>
+            <td><input class="form-control" type="number" required min="0" max="100000000" name="price" id="price"
+                       th:field="*{price}"/></td>
+        </div>
+        <div class="form-group">
+            <label for="quantity" th:text="#{productmanager.productquantity}"></label>
+            <input class="form-control" id="quantity" type="number" min="0" max="1000" name="quantity"
+                   th:field="*{quantity}"/>
+        </div>
+        <div class="form-group">
+            <label for="description" th:text="#{productmanager.productdescription}"></label>
+            <input class="form-control" id="description" type="text" name="description" th:field="*{description}"/>
+        </div>
+        <div class="form-group">
+            <label for="category" th:text="#{productmanager.productcategory}"></label>
+            <select class="form-control" id="category" name="category" th:field="*{category}">
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" th:text="#{productmanager.images}"></span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" multiple>
+                <label class="custom-file-label" th:text="#{productmanager.choosefiles}"></label>
+            </div>
+        </div>
+        <td><input type="submit" th:value="#{productmanager.create}"></td>
+    </form>
+</section>
 </body>
 </html>

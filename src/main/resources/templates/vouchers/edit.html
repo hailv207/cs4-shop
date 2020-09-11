@@ -23,11 +23,11 @@
         </div>
         <div class="form-group">
             <label for="discount" th:text="#{voucher.discount}"></label>
-            <input class="form-control" type="text" name="discount" th:field="*{discount}" id="discount">
+            <input class="form-control" type="number" name="discount" th:field="*{discount}" id="discount" required  min="10000" max="10000000">
         </div>
         <div class="form-group">
             <label for="campaign" th:text="#{voucher.campaign}"></label>
-            <input class="form-control"  type="text" name="campaign" th:field="*{campaign}" id="campaign">
+            <input class="form-control"  type="text" name="campaign" th:field="*{campaign}" id="campaign" required>
         </div>
         <div class="form-group">
             <label for="description" th:text="#{voucher.description}"></label>
