@@ -14,16 +14,11 @@
            style="margin-bottom: 15px"></a>
     </div>
     <div>
-        <ul th:if="${edit_done}">
+        <ul>
             <li th:if="${edit_done}" th:text="#{voucher.message.editdone}" style="color: green"></li>
-        </ul>
-        <ul th:if="${create_done}">
             <li th:if="${create_done}" th:text="#{voucher.message.createdone}" style="color: green"></li>
-        </ul>
-        <ul th:if="${delete_done}">
             <li th:if="${delete_done}" th:text="#{voucher.message.deletedone}" style="color: green"></li>
         </ul>
-
     </div>
     <div>
         <table class="table table-bordered">
@@ -44,8 +39,10 @@
                 <td th:text="${voucher.getCampaign()}"></td>
                 <td th:text="${@appFormatter.currencyFormat(voucher.getDiscount())}"></td>
                 <td th:text="${voucher.getDescription()}"></td>
-                <td><a class="btn btn-warning" th:href="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})}" th:text="#{voucher.edit}"></a></td>
-                <td><a class="btn btn-danger" th:href="@{/admin/vouchers/{id}/delete(id=${voucher.getId()})}" th:text="#{voucher.delete}"></a></td>
+                <td><a class="btn btn-warning" th:href="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})}"
+                       th:text="#{voucher.edit}"></a></td>
+                <td><a class="btn btn-danger" th:href="@{/admin/vouchers/{id}/delete(id=${voucher.getId()})}"
+                       th:text="#{voucher.delete}"></a></td>
             </tr>
         </table>
     </div>

@@ -1,5 +1,8 @@
 package com.red.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +12,12 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id",referencedColumnName = "id",nullable = false)
-    private Product product;
+    private String fileName;
 
-    private String url;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id",referencedColumnName = "id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Product product;
 
     public Image() {
     }
@@ -26,6 +30,14 @@ public class Image {
         this.id = id;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -34,11 +46,4 @@ public class Image {
         this.product = product;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

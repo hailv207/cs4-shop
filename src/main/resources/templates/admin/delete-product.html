@@ -1,46 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <head>
     <meta charset="UTF-8">
     <title th:text="#{productmanager.delete.title}"></title>
 </head>
 <body>
-<h1 th:text="#{productmanager.delete.title}"></h1>
-<p>
-    <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
-</p>
-<form th:action="@{/admin/delete-product}" th:object="${product}" method="post">
-    <table>
-        <input hidden type="text" name="id" th:field="*{id}">
-        <tr>
-            <td th:text="#{productmanager.productname}">:</td>
-            <td><input disabled type="text" name="name" th:field="*{name}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productprice}">:</td>
-            <td><input disabled type="text" name="age" th:field="*{price}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productquantity}">:</td>
-            <td><input disabled type="text" name="age" th:field="*{quantity}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productdescription}">:</td>
-            <td><input disabled type="text" name="age" th:field="*{description}"/></td>
-        </tr>
-        <tr>
-            <td th:text="#{productmanager.productcategory}">:</td>
-            <td>
-                <select disabled th:field="*{category}">
-                    <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" th:value="#{productmanager.delete}"></td>
-        </tr>
-    </table>
-</form>
+<section layout:fragment="content" class="container-xl mt-5">
+    <h3 th:text="#{productmanager.delete.title}"></h3>
+    <p>
+        <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
+    </p>
+    <form th:action="@{/admin/delete-product}" th:object="${product}" method="post">
+        <table>
+            <input hidden type="text" name="id" th:field="*{id}">
+            <tr>
+                <td th:text="#{productmanager.productname}">:</td>
+                <td><input disabled type="text" name="name" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td th:text="#{productmanager.productprice}">:</td>
+                <td><input disabled type="text" name="age" th:field="*{price}"/></td>
+            </tr>
+            <tr>
+                <td th:text="#{productmanager.productquantity}">:</td>
+                <td><input disabled type="text" name="age" th:field="*{quantity}"/></td>
+            </tr>
+            <tr>
+                <td th:text="#{productmanager.productdescription}">:</td>
+                <td><input disabled type="text" name="age" th:field="*{description}"/></td>
+            </tr>
+            <tr>
+                <td th:text="#{productmanager.productcategory}">:</td>
+                <td>
+                    <select disabled th:field="*{category}">
+                        <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" th:value="#{productmanager.delete}"></td>
+            </tr>
+        </table>
+    </form>
+</section>
 </body>
 </html>
