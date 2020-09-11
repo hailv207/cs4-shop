@@ -20,6 +20,9 @@ public class VoucherManagerController {
         ModelAndView modelAndView = new ModelAndView("vouchers/home");
         Iterable<Voucher> vouchers = voucherService.findAll();
         modelAndView.addObject("vouchers", vouchers);
+        modelAndView.addObject("edit_done",null);
+        modelAndView.addObject("delete_done",null);
+        modelAndView.addObject("create_done",null);
         return modelAndView;
     }
 
@@ -51,6 +54,8 @@ public class VoucherManagerController {
         voucherService.save(voucher);
         ModelAndView modelAndView = new ModelAndView("vouchers/home");
         modelAndView.addObject("create_done", true);
+        modelAndView.addObject("edit_done", null);
+        modelAndView.addObject("delete_done", null);
         modelAndView.addObject("vouchers",voucherService.findAll());
         return modelAndView;
     }
@@ -60,6 +65,8 @@ public class VoucherManagerController {
         voucherService.save(voucher);
         ModelAndView modelAndView = new ModelAndView("vouchers/home");
         modelAndView.addObject("edit_done", true);
+        modelAndView.addObject("create_done", null);
+        modelAndView.addObject("delete_done", null);
         modelAndView.addObject("vouchers",voucherService.findAll());
         return modelAndView;
     }
@@ -69,6 +76,8 @@ public class VoucherManagerController {
         voucherService.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("vouchers/home");
         modelAndView.addObject("delete_done", true);
+        modelAndView.addObject("edit_done", null);
+        modelAndView.addObject("create_done", null);
         modelAndView.addObject("vouchers",voucherService.findAll());
         return modelAndView;
     }
