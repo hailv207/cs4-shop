@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!--    FontAwesome Glyphicon-->
-    <script src="https://kit.fontawesome.com/dffada201a.js" crossorigin="anonymous"></script>
     <title th:text="#{voucher.delete.title}"></title>
 </head>
 <body>
-<div class="container-xl">
+<section layout:fragment="content" class="container-xl mt-5">
     <h3 th:text="#{voucher.edit.title}" style="color: orange"></h3>
     <form th:action="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})" method="post" th:object="${voucher}">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -39,7 +36,7 @@
             <input type="submit" class="btn btn-danger" th:text="#{voucher.delete}">
         </div>
     </form>
-</div>
+</section>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

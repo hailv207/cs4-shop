@@ -5,18 +5,32 @@ layout:decorator="layout_admin.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!--    FontAwesome Glyphicon-->
-    <script src="https://kit.fontawesome.com/dffada201a.js" crossorigin="anonymous"></script>
     <title th:text="#{voucher.home.title}"></title>
 </head>
 <body>
 <section layout:fragment="content" class="container-xl mt-5">
     <div>
         <a th:href="@{/admin/vouchers/create}" class="btn btn-primary" th:text="#{voucher.create}" style="margin-bottom: 15px"></a>
+    </div>
+    <div>
+        <ul th:if="${edit_done != null}">
+            <li th:if="${edit_done}" th:text="#{voucher.message.editdone}" style="color: green"></li>
+        </ul>
+        <ul th:if="${create_done != null}">
+            <li th:if="${create_done}" th:text="#{voucher.message.createdone}" style="color: green"></li>
+        </ul>
+        <ul th:if="${delete_done != null}">
+            <li th:if="${delete_done}" th:text="#{voucher.message.deletedone}" style="color: green"></li>
+        </ul>
+        <ul th:if="${edit_done != null}">
+            <li th:if="${!edit_done}" th:text="#{voucher.message.editfailed}" style="color: red"></li>
+        </ul>
+        <ul th:if="${create_done != null}">
+            <li th:if="${!create_done}" th:text="#{voucher.message.createfailed}" style="color: red"></li>
+        </ul>
+        <ul th:if="${delete_done != null}">
+            <li th:if="${!delete_done}" th:text="#{voucher.message.deletefailed}" style="color: red"></li>
+        </ul>
     </div>
     <div>
         <table class="table table-bordered">
@@ -37,8 +51,8 @@ layout:decorator="layout_admin.html">
                 <td th:text="${voucher.getCampaign()}"></td>
                 <td th:text="${voucher.getDiscount()}"></td>
                 <td th:text="${voucher.getDescription()}"></td>
-                <td><a class="btn btn-warning" th:href="@{voucher/{id}/edit(id=${voucher.getId()})"></a></td>
-                <td><a class="btn btn-danger" th:href="@{voucher/{id}/delete(id=${voucher.getId()})"></a></td>
+                <td><a class="btn btn-warning" th:href="@{voucher/{id}/edit(id=${voucher.getId()})}" th:text="#{voucher.edit}"></a></td>
+                <td><a class="btn btn-danger" th:href="@{voucher/{id}/delete(id=${voucher.getId()})}" th:text="#{voucher.delete}"></a></td>
             </tr>
         </table>
     </div>
