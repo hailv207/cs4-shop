@@ -9,7 +9,7 @@
 <p>
     <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
 </p>
-<form th:action="@{/admin/create-product}" method="post">
+<form th:action="@{/admin/create-product}" th:object="${product}" method="post">
     <table>
         <tr>
             <td th:text="#{productmanager.productname}">:</td>
@@ -35,10 +35,10 @@
                 </select>
             </td>
         </tr>
-        <tr>
-            <td th:text="#{productmanager.image}"></td>
-            <td><input type="text" name="image" th:field="*{image}"></td>
-        </tr>
+<!--        <tr>-->
+<!--            <td th:text="#{productmanager.image}"></td>-->
+<!--            <td><input type="text" name="image" th:field="*{image}"></td>-->
+<!--        </tr>-->
         <tr>
             <td></td>
             <td><input type="submit" th:value="#{productmanager.create}"></td>
