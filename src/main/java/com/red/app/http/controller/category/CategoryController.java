@@ -35,11 +35,9 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/create-category")
-    public ModelAndView createCategory(@ModelAttribute("category") Category category){
+    public String createCategory(@ModelAttribute("category") Category category){
         categoryService.save(category);
-        ModelAndView modelAndView = new ModelAndView("/category/create-category");
-        modelAndView.addObject("category", new Product());
-        return modelAndView;
+        return "redirect:/admin/categories";
     }
 
     @GetMapping("/admin/edit-category/{id}")
@@ -56,11 +54,9 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/edit-category")
-    public ModelAndView editCategory(@ModelAttribute("category") Category category){
+    public String editCategory(@ModelAttribute("category") Category category){
         categoryService.save(category);
-        ModelAndView modelAndView = new ModelAndView("/category/edit-category");
-        modelAndView.addObject("category", category);
-        return modelAndView;
+        return "redirect:/admin/categories";
     }
 
     @GetMapping("/admin/delete-category/{id}")
@@ -76,7 +72,7 @@ public class CategoryController {
        }
     }
 
-    @GetMapping("/admin/delete-category")
+    @PostMapping("/admin/delete-category")
     public String deleteCategory(@ModelAttribute("category") Category category){
         categoryService.delete(category);
         return "redirect:/admin/categories";

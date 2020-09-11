@@ -1,10 +1,32 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{categorymanager.edit.title}"></title>
 </head>
 <body>
+
+<section layout:fragment="content" class="container-xl mt-5">
+    <h3 th:text="#{categorymanager.edit.title}" style="color: orange"></h3>
+    <form th:action="@{/admin/edit-category}" method="post" th:object="${category}">
+        <input hidden type="text" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label for="create" th:text="#{categorymanager.name}"></label>
+            <input class="form-control" type="text" name="createdAt" th:field="*{name}" id="create">
+        </div>
+        <div class="form-group">
+            <label for="code" th:text="#{categorymanager.description}"></label>
+            <input class="form-control" type="text" name="code" th:field="*{description}" id="code">
+        </div>
+        <div>
+            <input type="submit" class="btn btn-warning" th:value="#{categorymanager.edit}">
+        </div>
+
+    </form>
+</section>
 
 </body>
 </html>
