@@ -19,6 +19,7 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public void setCode(Voucher voucher) {
         voucher.setCode(hashids.encode(voucher.getId()));
+        this.save(voucher);
     }
 
     @Override
