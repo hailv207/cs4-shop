@@ -32,8 +32,8 @@ public class Product {
         this.id = id;
     }
 
-    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "cat_id", referencedColumnName = "id")
     private Category category;
 
     public String getName() {

@@ -1,5 +1,6 @@
 package com.red.services.product;
 
+import com.red.model.Category;
 import com.red.model.Product;
 import com.red.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(Product entity) {
         productRepository.delete(entity);
+    }
+
+    @Override
+    public void deleteAllByCategory(Category category) {
+        productRepository.deleteAllByCategory(category);
+    }
+
+    @Override
+    public Iterable<Product> findAllByCategory(Category category) {
+        return productRepository.findAllByCategory(category);
     }
 }

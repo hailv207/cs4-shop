@@ -36,7 +36,9 @@
                 <td th:text="${product.getPrice()}"></td>
                 <td th:text="${product.getQuantity()}"></td>
                 <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getCategory().getName()}"></td>
+                <td>
+                <span th:if="${product.getCategory()}" th:text="${product.getCategory().getName()}"></span>
+                </td>
                 <td><a class="btn btn-warning" th:href="@{edit-product/{id}(id=${product.getId()})}">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">

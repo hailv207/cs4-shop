@@ -1,7 +1,9 @@
 package com.red.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -14,6 +16,16 @@ public class Category {
     private String name;
 
     private String description;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private Set<Product> products = new HashSet<>();
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public Category() {
     }
