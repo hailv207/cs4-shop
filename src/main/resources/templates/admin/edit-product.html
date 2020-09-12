@@ -9,7 +9,7 @@
 <body>
 <section layout:fragment="content" class="container-xl mt-5">
     <h3 th:text="#{productmanager.edit.title}" style="color: orange"></h3>
-    <form th:action="@{/admin/create-product}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/admin/edit-product/{id}(id=${product.getId()})}" th:object="${product}" method="post" enctype="multipart/form-data">
         <input hidden type="text" th:field="*{id}" name="id">
         <div class="form-group">
             <label for="name" th:text="#{productmanager.productname}"></label>
@@ -32,7 +32,7 @@
         <div class="form-group">
             <label for="category" th:text="#{productmanager.productcategory}"></label>
             <select class="form-control" id="category" name="category" th:field="*{category}">
-                <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                <option th:each="c : ${category}" th:value="${c.getId()}" th:text="${c.name}"></option>
             </select>
         </div>
         <div class="input-group mb-3">

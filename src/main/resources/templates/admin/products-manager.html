@@ -12,6 +12,13 @@
     <div class="container-fluid">
         <a class="btn btn-primary" th:href="@{/admin/create-product}" th:text="#{productmanager.addnewproduct}"></a>
     </div>
+    <div>
+        <ul>
+            <li th:if="${edit_done}" th:text="#{product.message.editdone}" style="color: green"></li>
+            <li th:if="${create_done}" th:text="#{product.message.createdone}" style="color: green"></li>
+            <li th:if="${delete_done}" th:text="#{product.message.deletedone}" style="color: green"></li>
+        </ul>
+    </div>
     <div class="container-fluid">
         <table class="table table-bordered">
             <tr style="background-color: #86cfda">

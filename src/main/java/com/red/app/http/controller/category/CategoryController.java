@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +39,9 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/create-category")
-    public String createCategory(@ModelAttribute("category") Category category) {
+    public String createCategory(@ModelAttribute("category") Category category,RedirectAttributes redirectAttributes) {
         categoryService.save(category);
+        redirectAttributes.addFlashAttribute("create_done", true);
         return "redirect:/admin/categories";
     }
 
@@ -57,8 +59,9 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/edit-category")
-    public String editCategory(@ModelAttribute("category") Category category) {
+    public String editCategory(@ModelAttribute("category") Category category,RedirectAttributes redirectAttributes) {
         categoryService.save(category);
+        redirectAttributes.addFlashAttribute("edit_done", true);
         return "redirect:/admin/categories";
     }
 
@@ -76,7 +79,7 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/delete-category")
-    public String deleteCategory(@ModelAttribute("category") Category category) {
+    public String deleteCategory(@ModelAttribute("category") Category category, RedirectAttributes redirectAttributes) {
 //        productService.deleteAllByCategory(category);
         List<Product> products = (List<Product>) productService.findAllByCategory(category);
         for (int i = 0; i < products.size(); i++) {
@@ -84,6 +87,7 @@ public class CategoryController {
             productService.save(products.get(i));
         }
         categoryService.delete(category);
+        redirectAttributes.addFlashAttribute("delete_done", true);
         return "redirect:/admin/categories";
     }
 }
