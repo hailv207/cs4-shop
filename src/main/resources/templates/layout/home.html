@@ -2,21 +2,57 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout.html">
+      layout:decorator="layout_users.html">
 <head>
-	<meta charset="UTF-8">
-	<title>Home</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
 </head>
 <body>
-<div layout:fragment="content" class="d-flex justify-content-center flex-column align-items-center" style="min-height: calc(calc(100vh) - calc(235px))">
-	<small class="p-2 bd-highlight">
-		Nguyễn Văn Toản - CodeGym
-	</small>
-	<div class="p-2 bd-highlight">
-		<h2>
-			Core Spring Boot Simple
-		</h2>
-	</div>
-</div>
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
+    <!--	<div th:text="${@router.map('HC#index')}"></div>-->
+    <!--	<div th:text="${#mvc.url('HC#index').build()}"></div>-->
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card user-intro-box mb-30">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>Intro</h3>
+
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bx bx-show"></i> View
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bx bx-edit-alt"></i> Edit
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bx bx-trash"></i> Delete
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bx bx-printer"></i> Print
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bx bx-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <p class="mb-0">Life Is Short Write Better Code....</p>
+
+                    <button type="submit">Edit Bio</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+        </div>
+    </div>
+</section>
 </body>
 </html>

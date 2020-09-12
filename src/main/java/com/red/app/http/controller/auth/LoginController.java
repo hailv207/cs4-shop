@@ -1,12 +1,14 @@
 package com.red.app.http.controller.auth;
 
 import com.red.model.User;
+import com.red.services.user.UserService;
 import com.red.system.auth.Auth;
 import com.red.system.auth.form.FormLogin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
@@ -21,7 +23,9 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -30,6 +34,9 @@ public class LoginController {
 
 	@Autowired
 	protected Auth auth;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	protected MessageSource messageSource;
@@ -46,7 +53,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String loginError(@Valid FormLogin formLogin, BindingResult bindingResult, Model model, HttpServletRequest request) {
-		String error = getErrorMessage(request);
+		String error = getErrorMessage(request, formLogin);
 
 		if (error != null){
 			model.addAttribute("error", error);
@@ -59,7 +66,7 @@ public class LoginController {
 	}
 
 	//customize the error message
-	private String getErrorMessage(HttpServletRequest request){
+	private String getErrorMessage(HttpServletRequest request, FormLogin formLogin){
 		Locale locale = RequestContextUtils.getLocale(request);
 
 		System.out.println(locale);
@@ -72,7 +79,14 @@ public class LoginController {
 		}
 
 		if(exception instanceof LockedException) {
-			errorMessage = exception.getMessage();
+			Optional<User> user = userService.findByEmail(formLogin.getEmail());
+			if(user.isPresent()){
+				LocalDateTime lastAttempts = user.get().getUpdatedAt();
+				String last = lastAttempts.toString();
+				String name = formLogin.getEmail();
+				errorMessage = messageSource.getMessage("auth.lockByUser", new Object[]{name, last}, locale);// The account or password is incorrect.
+			}else
+				errorMessage = exception.getMessage();
 		}else if(exception instanceof AccountExpiredException) {
 			errorMessage = exception.getMessage();
 		}else if(exception instanceof CredentialsExpiredException) {
