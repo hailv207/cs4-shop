@@ -7,43 +7,44 @@
     <title th:text="#{productmanager.delete.title}"></title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-5 mb-5">
     <h3 th:text="#{productmanager.delete.title}"></h3>
     <p>
         <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
     </p>
     <form th:action="@{/admin/delete-product}" th:object="${product}" method="post">
-        <table>
-            <input hidden type="text" name="id" th:field="*{id}">
-            <tr>
-                <td th:text="#{productmanager.productname}">:</td>
-                <td><input disabled type="text" name="name" th:field="*{name}"/></td>
-            </tr>
-            <tr>
-                <td th:text="#{productmanager.productprice}">:</td>
-                <td><input disabled type="text" name="age" th:field="*{price}"/></td>
-            </tr>
-            <tr>
-                <td th:text="#{productmanager.productquantity}">:</td>
-                <td><input disabled type="text" name="age" th:field="*{quantity}"/></td>
-            </tr>
-            <tr>
-                <td th:text="#{productmanager.productdescription}">:</td>
-                <td><input disabled type="text" name="age" th:field="*{description}"/></td>
-            </tr>
-            <tr>
-                <td th:text="#{productmanager.productcategory}">:</td>
-                <td>
-                    <select disabled th:field="*{category}">
-                        <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" th:value="#{productmanager.delete}"></td>
-            </tr>
-        </table>
+        <input hidden type="text" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label th:text="#{productmanager.productname}"></label>
+            <input class="form-control" disabled type="text" name="name" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{productmanager.productprice}"></label>
+            <input class="form-control" disabled type="text" name="price" th:field="*{price}"/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{productmanager.productquantity}"></label>
+            <input class="form-control" disabled type="text" name="quantity" th:field="*{quantity}"/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{productmanager.productdescription}">:</label>
+            <input class="form-control" disabled type="text" name="description" th:field="*{description}"/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{productmanager.productcategory}"></label>
+            <input class="form-control" disabled type="text" th:value="${cat.getName()}">
+        </div>
+        <div>
+            <div class="row mt-3">
+                <div class="mb-3 col-6 d-flex justify-content-center align-items-center" th:each="image : ${images}">
+                    <img th:src="@{/{fileName}(fileName=${image.getFileName()})}" alt="404 error"
+                         style="width: 300px;height: 200px">
+                </div>
+            </div>
+        </div>
+
+        <input class="btn btn-danger" type="submit" th:value="#{productmanager.delete}">
+        <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/product-manager}" />
     </form>
 </section>
 </body>

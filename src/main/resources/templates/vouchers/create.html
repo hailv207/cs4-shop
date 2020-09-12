@@ -8,7 +8,7 @@
     <title th:text="#{voucher.create.title}"></title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-5 mb-5">
     <h3 th:text="#{voucher.create.title}" style="color: #0a5eff"></h3>
     <form th:action="@{/admin/vouchers/create}" th:object="${voucher}" method="post">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -26,6 +26,7 @@
         </div>
         <div>
             <input type="submit" class="btn btn-primary" th:value="#{voucher.create}">
+            <a class="btn btn-info" th:text="#{voucher.back}" th:href="@{/admin/vouchers}"/>
         </div>
     </form>
 </section>

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-5 mb-5">
     <h3 th:text="#{voucher.edit.title}" style="color: orange"></h3>
     <form th:action="@{/admin/vouchers/{id}/edit(id=${voucher.getId()})}" method="post" th:object="${voucher}">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -35,6 +35,7 @@
         </div>
         <div>
             <input type="submit" class="btn btn-warning" th:value="#{voucher.save}">
+            <a class="btn btn-info" th:text="#{voucher.back}" th:href="@{/admin/vouchers}"/>
         </div>
 
     </form>

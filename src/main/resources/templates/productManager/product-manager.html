@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>Products Manager</h1>
-<a href="/admin/categories">Category</a>
-<a href="/admin/product-manager">products</a>
+<section layout:fragment="content" class="container-xl mt-5 mb-5">
+    <h3 style="color: #1c7430" th:text="#{productmanager.managermenu}"></h3>
+    <a class="btn btn-outline-primary" style="width: 300px;height: 50px" href="/admin/categories" th:text="#{productmanager.catmanager}"></a>
+    <a class="btn btn-outline-warning" href="/admin/product-manager" style="width: 300px;height: 50px" th:text="#{productmanager.productmanager}"></a>
+    <a class="btn btn-outline-info" href="/admin/vouchers" style="width: 300px;height: 50px" th:text="#{productmanager.vouchersmanager}"></a>
+</section>
 </body>
 </html>

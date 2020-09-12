@@ -39,11 +39,12 @@
                 <span class="input-group-text" th:text="#{productmanager.images}"></span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" multiple>
+                <input type="file" name="files" class="custom-file-input" multiple>
                 <label class="custom-file-label" th:text="#{productmanager.choosefiles}"></label>
             </div>
         </div>
-        <td><input type="submit" th:value="#{productmanager.create}"></td>
+        <input class="btn btn-primary" type="submit" th:value="#{productmanager.create}">
+        <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/product-manager}" />
     </form>
 </section>
 </body>

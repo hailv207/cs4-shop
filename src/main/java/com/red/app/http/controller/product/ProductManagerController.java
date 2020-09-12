@@ -12,10 +12,7 @@ import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -70,7 +67,7 @@ public class ProductManagerController {
     }
 
     @PostMapping("/admin/create-product")
-    public String createProduct(@ModelAttribute("product") Product product, MultipartFile[] files, RedirectAttributes redirectAttributes) {
+    public String createProduct(@ModelAttribute("product") Product product, @RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         productService.save(product);
         for (MultipartFile file : files) {
             Image image = new Image();
@@ -103,7 +100,7 @@ public class ProductManagerController {
     }
 
     @PostMapping("/admin/edit-product")
-    public String editProduct(@ModelAttribute("product") Product product, MultipartFile[] files, RedirectAttributes redirectAttributes) {
+    public String editProduct(@ModelAttribute("product") Product product,@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         productService.save(product);
         for (MultipartFile file : files) {
             Image image = new Image();
@@ -124,6 +121,8 @@ public class ProductManagerController {
         if (product != null) {
             ModelAndView modelAndView = new ModelAndView("/admin/delete-product");
             modelAndView.addObject("product", product);
+            Category category = product.get().getCategory();
+            modelAndView.addObject("cat",category);
             Iterable<Image> images = imageService.findAllByProduct(product.get());
             modelAndView.addObject("images", images);
             return modelAndView;
