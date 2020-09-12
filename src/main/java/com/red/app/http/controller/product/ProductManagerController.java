@@ -112,6 +112,7 @@ public class ProductManagerController {
             imageService.save(image);
             storage.putFile(file, "/upload", image.getFileName());
         }
+        redirectAttributes.addFlashAttribute("edit_done", true);
         return "redirect:/admin/product-manager";
     }
 
@@ -144,6 +145,13 @@ public class ProductManagerController {
         }
         productService.delete(product);
         redirectAttributes.addFlashAttribute("delete_done", true);
+        return "redirect:/admin/product-manager";
+    }
+
+    @PostMapping("/admin/edit-product/{id}")
+    public String editProduct(@ModelAttribute("product") Product product,RedirectAttributes redirectAttributes){
+        productService.save(product);
+        redirectAttributes.addFlashAttribute("edit_done",true);
         return "redirect:/admin/product-manager";
     }
 

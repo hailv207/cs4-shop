@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_admin.html">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +13,16 @@
     <title th:text="#{categorymanager.title}"></title>
 </head>
 <body>
-<div class="container-xl">
+<section layout:fragment="content" class="container-xl mt-5 mb-5">
     <div class="container-fluid">
         <a class="btn btn-primary" th:href="@{/admin/create-category}" th:text="#{categorymanager.add}"></a>
+    </div>
+    <div>
+        <ul>
+            <li th:if="${edit_done}" th:text="#{category.message.editdone}" style="color: green"></li>
+            <li th:if="${create_done}" th:text="#{category.message.createdone}" style="color: green"></li>
+            <li th:if="${delete_done}" th:text="#{category.message.deletedone}" style="color: green"></li>
+        </ul>
     </div>
     <div class="container-fluid">
         <table class="table table-bordered">
@@ -40,7 +49,7 @@
         </table>
 
     </div>
-</div>
+</section>
 
 
 <!-- Optional JavaScript -->
