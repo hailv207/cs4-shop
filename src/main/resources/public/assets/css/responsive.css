@@ -75,9 +75,6 @@
     position: relative;
     top: -2px;
   }
-  .top-navbar.navbar .profile-nav-item .menu-profile .name {
-    display: none;
-  }
   .top-navbar.navbar.is-sticky {
     left: 0;
     width: 100%;
@@ -997,9 +994,6 @@
   .top-navbar.navbar .profile-nav-item {
     position: relative;
     top: -2px;
-  }
-  .top-navbar.navbar .profile-nav-item .menu-profile .name {
-    display: none;
   }
   .top-navbar.navbar.is-sticky {
     left: 0;

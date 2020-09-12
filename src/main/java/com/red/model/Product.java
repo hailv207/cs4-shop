@@ -1,5 +1,8 @@
 package com.red.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -33,7 +36,8 @@ public class Product {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cat_id", referencedColumnName = "id")
+    @JoinColumn(name = "cat_id", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Category category;
 
     public String getName() {

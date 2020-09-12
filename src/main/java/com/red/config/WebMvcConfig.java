@@ -4,6 +4,7 @@ import org.hashids.Hashids;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @Configuration
+@PropertySource("classpath:application-language.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -27,6 +29,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         source.setBasenames(
                 "i18n/auth",
                 "i18n/admin",
+                "i18n/site",
                 "i18n/voucher"
         );
         source.setDefaultEncoding("UTF-8");

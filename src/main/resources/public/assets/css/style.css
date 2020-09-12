@@ -79,6 +79,14 @@ p {
   margin-top: 20px;
 }
 
+.mt-100 {
+  margin-top: 100px!important
+}
+
+.pt-100 {
+  padding-top: 100px!important
+}
+
 button, input {
   outline: 0 !important;
 }
@@ -579,6 +587,12 @@ Top Navbar CSS
   padding-left: 0;
   padding-right: 0;
   padding-top: 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 999;
 }
 
 .top-navbar.navbar .responsive-burger-menu {

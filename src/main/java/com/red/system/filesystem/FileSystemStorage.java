@@ -23,7 +23,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 @Component
-//@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class FileSystemStorage implements Storage {
     public FileSystemStorage() {
     }
@@ -33,13 +32,17 @@ public class FileSystemStorage implements Storage {
      */
     public Path getPath(String pathString) {
         Path path = Paths.get(pathString);
-        makeDirectory(path);
+        if (!path.getParent().toFile().exists()) {
+            makeDirectory(path);
+        }
         return path;
     }
 
     public Path getPath(String filename, String pathString) {
         Path path = Paths.get(pathString);
-        makeDirectory(path);
+        if (!path.toFile().exists()) {
+            makeDirectory(path);
+        }
         path = Paths.get(path.toString() + "/" + filename);
         return path;
     }
@@ -47,17 +50,17 @@ public class FileSystemStorage implements Storage {
     @Override
     public void putFile(MultipartFile file, String path) {
         String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-            if (file.isEmpty())
-                throw new StorageException("Failed to store empty file " + filename);
+        if (file.isEmpty())
+            throw new StorageException("Failed to store empty file " + filename);
 
-            checkPath(filename, path);
-            try {
-                InputStream inputStream = file.getInputStream();
-                Path path_save = getPath(filename, path);
-                Files.copy(inputStream, path_save, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        checkPath(filename, path);
+        try {
+            InputStream inputStream = file.getInputStream();
+            Path path_save = getPath(filename, path);
+            Files.copy(inputStream, path_save, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -102,7 +105,7 @@ public class FileSystemStorage implements Storage {
     @Override
     public boolean exists(String filename) {
         checkPath(filename);
-        Path file = getPath(filename);
+        Path file = Paths.get(filename);
         try {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
