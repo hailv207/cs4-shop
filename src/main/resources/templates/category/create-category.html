@@ -9,7 +9,7 @@
 </head>
 <body>
 <section layout:fragment="content" class="container-xl mt-100 mb-5">
-    <h3 th:text="#{categorymanager.create.title}" style="color: orange"></h3>
+    <h3 th:text="#{categorymanager.create.title}" style="color: deepskyblue"></h3>
     <form th:action="@{/admin/create-category}" method="post" th:object="${category}">
         <input hidden type="text" name="id" th:field="*{id}">
         <div class="form-group">
@@ -22,7 +22,7 @@
         </div>
         <div>
             <input type="submit" class="btn btn-warning" th:value="#{categorymanager.create}">
-            <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/category-manager}"/>
+            <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/categories}"/>
         </div>
     </form>
 </section>

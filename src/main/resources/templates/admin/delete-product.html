@@ -8,10 +8,7 @@
 </head>
 <body>
 <section layout:fragment="content" class="container-xl mt-100 mb-5">
-    <h3 th:text="#{productmanager.delete.title}"></h3>
-    <p>
-        <a href="/admin/product-manager" th:text="#{productmanager.list}"></a>
-    </p>
+    <h3 th:text="#{productmanager.delete.title}" style="color: red"></h3>
     <form th:action="@{/admin/delete-product}" th:object="${product}" method="post">
         <input hidden type="text" name="id" th:field="*{id}">
         <div class="form-group">

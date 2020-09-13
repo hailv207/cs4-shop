@@ -9,7 +9,7 @@
 </head>
 <body>
 <section layout:fragment="content" class="container-xl mt-100 mb-5">
-    <h3 th:text="#{voucher.edit.title}" style="color: orange"></h3>
+    <h3 th:text="#{voucher.delete.title}" style="color: red"></h3>
     <form th:action="@{/admin/vouchers/{id}/delete(id=${voucher.getId()})}" method="post" th:object="${voucher}">
         <input hidden type="text" name="id" th:field="*{id}">
         <div class="form-group">

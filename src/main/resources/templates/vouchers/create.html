@@ -9,7 +9,7 @@
 </head>
 <body>
 <section layout:fragment="content" class="container-xl mt-100 mb-5">
-    <h3 th:text="#{voucher.create.title}" style="color: #0a5eff"></h3>
+    <h3 th:text="#{voucher.create.title}" style="color: deepskyblue"></h3>
     <form th:action="@{/admin/vouchers/create}" th:object="${voucher}" method="post">
         <input hidden type="text" name="id" th:field="*{id}">
         <div class="form-group">
