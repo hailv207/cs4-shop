@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<section layout:fragment="content" class="container-xl mt-5 mb-5">
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
     <h3 th:text="#{categorymanager.delete.title}" style="color: orange"></h3>
     <form th:action="@{/admin/delete-category}" method="post" th:object="${category}">
         <input hidden type="text" name="id" th:field="*{id}">
@@ -23,7 +23,7 @@
         </div>
         <div>
             <input type="submit" class="btn btn-warning" th:value="#{categorymanager.delete}">
-            <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/category-manager}"/>
+            <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/categories}"/>
         </div>
 
     </form>

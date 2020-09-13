@@ -8,7 +8,7 @@
     <title th:text="#{categorymanager.create.title}"></title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5 mb-5">
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
     <h3 th:text="#{categorymanager.create.title}" style="color: orange"></h3>
     <form th:action="@{/admin/create-category}" method="post" th:object="${category}">
         <input hidden type="text" name="id" th:field="*{id}">

@@ -7,7 +7,7 @@
     <title th:text="#{productmanager.title}">Create Product</title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
     <h3 th:text="#{productmanager.edit.title}" style="color: orange"></h3>
     <form th:action="@{/admin/edit-product/{id}(id=${product.getId()})}" th:object="${product}" method="post" enctype="multipart/form-data">
         <input hidden type="text" th:field="*{id}" name="id">
