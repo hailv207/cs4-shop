@@ -67,17 +67,21 @@ public class ProductManagerController {
     }
 
     @PostMapping("/admin/create-product")
-    public String createProduct(@ModelAttribute("product") Product product, @RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
+    public String createProduct(@ModelAttribute("product") Product product, @RequestParam(value = "files", required = false) MultipartFile[] files, RedirectAttributes redirectAttributes) {
         productService.save(product);
-        for (MultipartFile file : files) {
-            Image image = new Image();
-            image.setProduct(product);
-            imageService.save(image);
-            String nameFile = file.getOriginalFilename();
-            String extension = nameFile.substring(nameFile.lastIndexOf("."));
-            image.setFileName(hashids.encode(image.getId()) + extension);
-            imageService.save(image);
-            storage.putFile(file, "upload", image.getFileName());
+        if (files != null && files.length > 0){
+            for (MultipartFile file : files) {
+                if (file.getSize() > 0){
+                    Image image = new Image();
+                    image.setProduct(product);
+                    imageService.save(image);
+                    String nameFile = file.getOriginalFilename();
+                    String extension = nameFile.substring(nameFile.lastIndexOf("."));
+                    image.setFileName(hashids.encode(image.getId()) + extension);
+                    imageService.save(image);
+                    storage.putFile(file, "upload", image.getFileName());
+                }
+            }
         }
 
         redirectAttributes.addFlashAttribute("create_done", true);
@@ -97,22 +101,6 @@ public class ProductManagerController {
             ModelAndView modelAndView = new ModelAndView("/error/404");
             return modelAndView;
         }
-    }
-
-    @PostMapping("/admin/edit-product")
-    public String editProduct(@ModelAttribute("product") Product product,@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
-        productService.save(product);
-        for (MultipartFile file : files) {
-            Image image = new Image();
-            image.setProduct(product);
-            imageService.save(image);
-            String nameFile = file.getOriginalFilename();
-            String extension = nameFile.substring(nameFile.lastIndexOf("."));
-            image.setFileName(hashids.encode(image.getId()) + extension);
-            imageService.save(image);
-            storage.putFile(file, "/upload", image.getFileName());
-        }
-        return "redirect:/admin/product-manager";
     }
 
     @GetMapping("/admin/delete-product/{id}")

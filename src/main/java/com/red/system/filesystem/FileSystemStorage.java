@@ -4,6 +4,10 @@ package com.red.system.filesystem;
 import com.red.system.filesystem.exception.FileNotFoundException;
 import com.red.system.filesystem.exception.StorageException;
 
+import com.red.system.properties.StorageProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -23,15 +27,23 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 @Component
+@EnableConfigurationProperties(HibernateProperties.class)
 public class FileSystemStorage implements Storage {
+    @Autowired
+    private StorageProperties storageProperties;
+
     public FileSystemStorage() {
+    }
+
+    private String getLocation(String path) {
+        return storageProperties.getLocation() + "/" + path;
     }
 
     /*
      * Lấy dường dẫn tệp trong thư mục gốc
      */
     public Path getPath(String pathString) {
-        Path path = Paths.get(pathString);
+        Path path = Paths.get(getLocation(pathString));
         if (!path.getParent().toFile().exists()) {
             makeDirectory(path);
         }
@@ -39,7 +51,7 @@ public class FileSystemStorage implements Storage {
     }
 
     public Path getPath(String filename, String pathString) {
-        Path path = Paths.get(pathString);
+        Path path = Paths.get(getLocation(pathString));
         if (!path.toFile().exists()) {
             makeDirectory(path);
         }
@@ -98,14 +110,16 @@ public class FileSystemStorage implements Storage {
     @Override
     public void delete(String file) {
         checkPath(file);
-        Path path = getPath(file);
-        FileSystemUtils.deleteRecursively(path.toFile());
+        if (exists(file)){
+            Path path = Paths.get(getLocation(file));
+            FileSystemUtils.deleteRecursively(path.toFile());
+        }
     }
 
     @Override
     public boolean exists(String filename) {
         checkPath(filename);
-        Path file = Paths.get(filename);
+        Path file = Paths.get(getLocation(filename));
         try {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {

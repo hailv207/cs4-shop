@@ -8,49 +8,29 @@
     <title>Home</title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-100 mb-5">
-    <!--	<div th:text="${@router.map('HC#index')}"></div>-->
-    <!--	<div th:text="${#mvc.url('HC#index').build()}"></div>-->
+<section layout:fragment="content" class="container-xl mt-100 mb-5 p-0">
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card user-intro-box mb-30">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3>Intro</h3>
-
-                    <div class="dropdown">
-                        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bx bx-show"></i> View
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bx bx-edit-alt"></i> Edit
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bx bx-trash"></i> Delete
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bx bx-printer"></i> Print
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bx bx-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <p class="mb-0">Life Is Short Write Better Code....</p>
-
-                    <button type="submit">Edit Bio</button>
+        <div class="col-lg-3 mb-3">
+            <div class="card mb-2" style="padding: 0px;">
+                <div class="card-title pt-3 pl-3 pr-3 text-uppercase">Danh mục</div>
+                <div class="list-group border-0">
+                    <a th:each="category : ${categories}" th:href="@{/category/{id}(id=${category.getId()})}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">
+                        <th:block th:text="${category.getName()}"></th:block>
+                        <span class="badge badge-primary badge-pill" th:text="${@productServiceImpl.countAllByCategory(category)}"></span>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-8">
+        <div class="col-lg-9 mb-3">
+            <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+                <div class="card-title text-uppercase">Sản phảm</div>
+                <div class="row">
+                    <th:block th:each="product : ${pages}">
+                        <div layout:replace="layout/product/item/item-col_3::item(${product})"></div>
+                    </th:block>
+                </div>
+            </div>
+            <div layout:replace="pagination/pagination::page(${pages}, '/')"></div>
         </div>
     </div>
 </section>

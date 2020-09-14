@@ -10,9 +10,10 @@ import java.util.Optional;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+    private static final String default_thumb_150x75 = "/assets/img/150x75.jpg";
+
     @Autowired
     ImageRepository imageRepository;
-
 
     @Override
     public Iterable<Image> findAll() {
@@ -47,5 +48,15 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Iterable<Image> findAllByProduct(Product product) {
         return imageRepository.findAllByProduct(product);
+    }
+
+    @Override
+    public String getThumbnail(Product entity){
+        Optional<Image> optionalImage = imageRepository.findTopByProduct(entity);
+        if (optionalImage.isPresent() && optionalImage.get().getFileName() != null){
+            return "/upload/" + optionalImage.get().getFileName();
+        }
+
+        return default_thumb_150x75;
     }
 }

@@ -10,7 +10,7 @@ public class CartItem {
     }
 
     public CartItem(Product product){
-        this.product = product;
+        this.product  = product;
         this.quantity = 1;
     }
 
