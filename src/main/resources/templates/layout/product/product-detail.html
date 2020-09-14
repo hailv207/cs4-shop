@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.getName()}"></title>
+</head>
+<body>
+
+<th:block layout:fragment="head">
+    <link type="text/css" rel="stylesheet" th:href="@{/assets/js/lightGallery/css/lightgallery.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/assets/js/lightslider/css/lightslider.css}"/>
+</th:block>
+
+<main layout:fragment="content" class="mt-100 mb-5">
+    <style>
+        #imageGallery,
+        #imageGallery img {
+            max-height: 415px !important;
+        }
+
+        @media (min-width: 768px) {
+            .top-detail .product-gallery {
+                border-right: 1px solid #e7e7e7 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-detail .product-gallery {
+                border-bottom: 1px solid #e7e7e7 !important;
+            }
+        }
+
+        .lSPager.lSGallery li {
+            border: 1px solid #d7d7d7;
+            padding: 3px;
+            display: flex;
+            border-radius: 5px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lSSlideWrapper {
+            background: rgb(240, 240, 240);
+            border-radius: 10px;
+        }
+
+        .lSAction > a {
+            background: rgb(255 255 255) !important;
+            border-radius: 30px !important;
+            opacity: 0.3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lSSlideOuter .lSPager.lSGallery li.active {
+            border: 1px solid #F44336;
+            box-shadow: 0 0px 2px 0 rgb(255 0 0 / 19%), 0 0px 4px 0px rgb(255 0 0 / 23%), 0 0px 8px 0 rgb(255 0 0 / 21%);
+        }
+
+        .lSSlideOuter .lSPager.lSGallery li:not(.active):hover {
+            border: 1px solid #F44336;
+        }
+
+        .owl-carousel .owl-stage,
+        .owl-carousel .owl-stage .product_item {
+            display: flex;
+            align-items: stretch;
+            height: 100%;
+        }
+
+        .lSSlideOuter .lSPager.lSGallery img.thumb-cat {
+            display: none !important;
+        }
+
+        .top-detail h1.title {
+            font-size: 24px;
+            line-height: 30px;
+            margin: 0px;
+        }
+
+        .top-detail .header {
+            border-bottom: 1px solid #e7e7e7 !important;
+        }
+
+        .price {
+            color: rgb(255, 52, 37);
+            font-size: 19px;
+            font-weight: 500;
+            margin: 0px;
+        }
+    </style>
+    <div class="breadcrumb-holder">
+        <ul class="breadcrumb container-xl text-uppercase">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/category/{id}(id=${product.getCategory().getId()})}"
+                   th:text="${product.getCategory().getName()}"></a>
+            </li>
+        </ul>
+    </div>
+    <section class="container-xl p-0">
+        <div class="top-detail card p-0 mb-4">
+            <div class="row m-0">
+                <div class="product-gallery col-sm-12 col-md-6 pt-3 pb-3">
+                    <ul id="imageGallery">
+                        <li th:each="image: ${images}"
+                            data-th-data-thumb="@{/upload/{fileName}(fileName=${image.getFileName()})}"
+                            data-th-data-src="@{/upload/{fileName}(fileName=${image.getFileName()})}"
+                            data-th-data-alt="${product.getName()}">
+                            <div class="text-center h-100 w-100 d-flex justify-content-center align-items-center">
+                                <img style="max-height: 100%; max-width: 100%"
+                                     th:src="@{/upload/{fileName}(fileName=${image.getFileName()})}"
+                                     th:alt="${product.getName()}"/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 p-0 d-flex align-items-start flex-column">
+                    <div class="header border-bottom p-3 w-100">
+                        <h1 class="title" th:text="${product.getName()}"></h1>
+                        <p class="mb-0" style="font-size: 17px; color: #FFC107;">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                        </p>
+                    </div>
+                    <div class="body p-3 mb-auto w-100">
+                        <div class="price">
+                            <span style="color: #000000; font-size: 16px;">Giá bán: </span>
+                            <th:block th:text="${@appFormatter.currencyFormat(product.getPrice())}"></th:block>
+                        </div>
+                        <div class="mt-2">Tình trạng: <span
+                                th:style="${product.getQuantity() > 0 ? 'color:#0089f7' : 'color:#FF5722'}"
+                                th:text="${product.getQuantity() > 0 ? 'còn hàng' : 'hết hàng'}"></span></div>
+                    </div>
+                    <div class="d-flex align-items-center mt-auto mb-auto p-3" th:if="${product.getQuantity() > 0}" >
+                        <div style="font-size: 13px;">
+                            Số lượng:
+                        </div>
+                        <input type="number" value="1" min="1" th:max="${product.getQuantity()}" class="ml-2" style="min-width: 100px;border: 1px solid #d7d7d7;padding: 5px 10px; border-radius: 15px;"/>
+                        <button class="btn btn_add_cart btn-outline-success ml-2 d-flex align-items-center" data-th-data-id="${product.getId()}">
+                            <i class='bx bx-cart mr-2' style="font-size: 22px;"></i> Thêm
+                        </button>
+                    </div>
+                    <div class="w-100 pl-3 pr-3 pt-2 p-2 text-right"><small>Thiết kế bởi: Toản nguyễn</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="body-detail mb-4">
+            <div>MÔ TẢ SẢN PHẨM</div>
+            <div class="card" th:text="${product.getDescription()}">
+            </div>
+        </div>
+        <div class="mb-4" th:if="${same_products.size() > 0}">
+            <div>CÙNG DANH MỤC</div>
+            <div class="card p-0">
+                <div class="owl-carousel owl-theme product_slider">
+                    <th:block th:each="same_product : ${same_products}">
+                        <div layout:replace="layout/product/item/item-same::item(${same_product})"></div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<th:block layout:fragment="f_script">
+    <script th:src="@{/assets/js/owlcarousel/owl.carousel.min.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/assets/css/owlcarousel/owl.carousel.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/assets/css/owlcarousel/owl.theme.default.min.css}"/>
+
+    <script th:src="@{/assets/js/lightGallery/js/lightgallery.js}"></script>
+    <script th:src="@{/assets/js/lightslider/js/lightslider.js}"></script>
+
+    <script>
+        $(document).ready(function () {
+            let slider = $('#imageGallery').lightSlider({
+                gallery: true,
+                item: 1,
+                thumbItem: 6,
+
+                thumbsLeft: false,
+
+                enableDrag: false,
+                thumbMargin: 4,
+                slideMargin: 0,
+
+                vertical: false,
+                verticalHeight: 400,
+                vThumbWidth: 80,
+                vThumbHeight: 80,
+                prevHtml: "<svg width=\"1.3em\" height=\"1.3em\" viewBox=\"0 0 16 16\" class=\"bi bi-chevron-left\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path fill-rule=\"evenodd\" d=\"M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z\"/>\n" +
+                    "</svg>",
+
+                nextHtml: "<svg width=\"1.3em\" height=\"1.3em\" viewBox=\"0 0 16 16\" class=\"bi bi-chevron-right\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path fill-rule=\"evenodd\" d=\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\"/>\n" +
+                    "</svg>",
+
+                onSliderLoad: function (el) {
+                    el.lightGallery({
+                        selector: '#imageGallery .lslide'
+                    });
+                }
+            });
+        });
+
+        if ($('.product_slider').length > 0){
+            $('.product_slider').owlCarousel({
+                items: 1,
+                center: false,
+                autoplay:true,
+                autoplayTimeout:3000,
+                autoplayHoverPause:true,
+                loop: true,
+                margin: 0,
+                dots: false,
+                nav: true,
+                navText: [
+                    "<svg width=\"1.3em\" height=\"1.3em\" viewBox=\"0 0 16 16\" class=\"bi bi-chevron-left\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path fill-rule=\"evenodd\" d=\"M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z\"/>\n" +
+                    "</svg>",
+                    "<svg width=\"1.3em\" height=\"1.3em\" viewBox=\"0 0 16 16\" class=\"bi bi-chevron-right\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path fill-rule=\"evenodd\" d=\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\"/>\n" +
+                    "</svg>"
+                ],
+                responsiveRefreshRate: 100,
+                responsive: {
+                    0: {items: 1},
+                    425: {items: 2},
+                    640: {items: 3},
+                    959: {items: 4},
+                }
+            });
+        }
+    </script>
+</th:block>
+</body>
+</html>

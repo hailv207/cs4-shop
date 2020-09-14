@@ -2,10 +2,9 @@ package com.red.system.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "storage")
+@ConfigurationProperties(prefix = "storage", ignoreUnknownFields = false)
 public class StorageProperties {
     private String location;
-    private String disk;
 
 	public StorageProperties() {
 	}
@@ -16,13 +15,5 @@ public class StorageProperties {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public String getDisk() {
-		return disk;
-	}
-
-	public void setDisk(String disk) {
-		this.disk = disk;
 	}
 }

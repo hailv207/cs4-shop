@@ -36,7 +36,7 @@
                 <td th:text="${product.getName()}"></td>
                 <td th:text="${product.getPrice()}"></td>
                 <td th:text="${product.getQuantity()}"></td>
-                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${@helpers.cutText(product.getDescription(), 0, 100)}"></td>
                 <td>
                 <span th:if="${product.getCategory()}" th:text="${product.getCategory().getName()}"></span>
                 </td>
