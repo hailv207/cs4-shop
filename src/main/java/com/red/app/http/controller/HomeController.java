@@ -1,21 +1,47 @@
 package com.red.app.http.controller;
 
+import com.red.model.Category;
+import com.red.model.Product;
+import com.red.services.category.CategoryService;
+import com.red.services.product.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.support.RequestContextUtils;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
-	@GetMapping("/")
-	public String index(HttpServletRequest request){
-		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-		System.out.println("===========================================================================================");
+	private static final Integer size = 6;
 
-		System.out.println(localeResolver);
-		System.out.println(localeResolver.resolveLocale(request).toString());
+	@Autowired
+	private ProductService productService;
+
+	@Autowired
+	private CategoryService categoryService;
+
+	@GetMapping("/")
+	public String index(@ModelAttribute("page") @RequestParam(required = false) Integer page, Model model){
+		Pageable pageProduct = null;
+		if (page == null || page < 1){
+			pageProduct = PageRequest.of(0, size, Sort.by("id").descending());
+		}else{
+			--page;
+			pageProduct = PageRequest.of(page, size, Sort.by("id").descending());
+		}
+
+		Iterable<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
+
+		Page<Product> products = productService.findAll(pageProduct);
+
+		model.addAttribute("pages", products);
+
 		return "layout/home";
 	}
 }

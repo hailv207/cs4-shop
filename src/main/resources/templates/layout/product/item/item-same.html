@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body layout:fragment="item(product)">
+<article class="product_item block_img m-0 d-flex align-items-start flex-column" data-th-data-id="${product.getId()}">
+    <a th:href="@{/product/{id}(id=${product.getId()})}" class="w-100 h-100">
+        <div class="product_thumb"
+             th:style="'background-image: url(' + ${@imageServiceImpl.getThumbnail(product)} + ');'"></div>
+        <div class="name text-uppercase mt-3" th:text="${product.getName()}"></div>
+    </a>
+    <div th:if="${product.getQuantity() < 1}" class="het-hang">
+        Hết hàng
+    </div>
+</article>
+</body>
+</html>

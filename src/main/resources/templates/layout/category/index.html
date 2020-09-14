@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${category.getName()}"></title>
+</head>
+<body>
+<section layout:fragment="content" class="container-xl mt-100 mb-5 p-0">
+    <div class="mb-3">
+        <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+            <div class="card-title text-uppercase" th:text="${category.getName()} + ' [' + ${@productServiceImpl.countAllByCategory(category)} +']'"></div>
+            <div class="row">
+                <th:block th:each="product : ${pages}">
+                    <div layout:replace="layout/product/item/item-col_4::item(${product})"></div>
+                </th:block>
+            </div>
+        </div>
+        <div layout:replace="pagination/pagination::page(${pages}, '/category/' + ${category.getId()})"></div>
+    </div>
+</section>
+</body>
+</html>

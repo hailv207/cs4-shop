@@ -6,4 +6,5 @@ import com.red.services.IGeneralService;
 
 public interface ImageService extends IGeneralService<Image> {
     Iterable<Image> findAllByProduct(Product product);
+    String getThumbnail(Product entity);
 }

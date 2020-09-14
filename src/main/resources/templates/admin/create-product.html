@@ -7,7 +7,7 @@
     <title th:text="#{productmanager.title}"></title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
     <h3 th:text="#{productmanager.addnewproduct}" style="color: deepskyblue"></h3>
     <form th:action="@{/admin/create-product}" th:object="${product}" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -26,7 +26,8 @@
         </div>
         <div class="form-group">
             <label for="description" th:text="#{productmanager.productdescription}"></label>
-            <input class="form-control" id="description" type="text" name="description" th:field="*{description}"/>
+            <textarea class="form-control" id="description" type="text" name="description" th:field="*{description}">
+            </textarea>
         </div>
         <div class="form-group">
             <label for="category" th:text="#{productmanager.productcategory}"></label>

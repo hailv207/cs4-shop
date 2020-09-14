@@ -8,7 +8,7 @@
     <title th:text="#{productmanager.title}"></title>
 </head>
 <body>
-<section layout:fragment="content" class="container-xl mt-5">
+<section layout:fragment="content" class="container-xl mt-100 mb-5">
     <div class="container-fluid">
         <a class="btn btn-primary" th:href="@{/admin/create-product}" th:text="#{productmanager.addnewproduct}"></a>
     </div>
@@ -36,7 +36,7 @@
                 <td th:text="${product.getName()}"></td>
                 <td th:text="${product.getPrice()}"></td>
                 <td th:text="${product.getQuantity()}"></td>
-                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${@helpers.cutText(product.getDescription(), 0, 100)}"></td>
                 <td>
                 <span th:if="${product.getCategory()}" th:text="${product.getCategory().getName()}"></span>
                 </td>
