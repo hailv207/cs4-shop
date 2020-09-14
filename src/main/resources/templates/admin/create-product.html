@@ -9,7 +9,8 @@
 <body>
 <section layout:fragment="content" class="container-xl mt-100 mb-5">
     <h3 th:text="#{productmanager.addnewproduct}" style="color: deepskyblue"></h3>
-    <form th:action="@{/admin/create-product}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <form id="create_form" th:action="@{/admin/create-product}" th:object="${product}" method="post"
+          enctype="multipart/form-data">
         <div class="form-group">
             <label for="name" th:text="#{productmanager.productname}"></label>
             <input class="form-control" type="text" name="name" id="name" th:field="*{name}" required/>
@@ -40,13 +41,14 @@
                 <span class="input-group-text" th:text="#{productmanager.images}"></span>
             </div>
             <div class="custom-file">
-                <input type="file" name="files" class="custom-file-input" multiple>
+                <input type="file" id="images" name="files" class="custom-file-input" multiple>
                 <label class="custom-file-label" th:text="#{productmanager.choosefiles}"></label>
             </div>
         </div>
         <input class="btn btn-primary" type="submit" th:value="#{productmanager.create}">
-        <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/product-manager}" />
+        <a class="btn btn-info" th:text="#{productmanager.back}" th:href="@{/admin/product-manager}"/>
     </form>
+
 </section>
 </body>
 </html>

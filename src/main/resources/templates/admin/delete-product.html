@@ -34,7 +34,7 @@
         <div>
             <div class="row mt-3">
                 <div class="mb-3 col-6 d-flex justify-content-center align-items-center" th:each="image : ${images}">
-                    <img th:src="@{/{fileName}(fileName=${image.getFileName()})}" alt="404 error"
+                    <img th:src="@{/upload/{fileName}(fileName=${image.getFileName()})}" alt="404 error"
                          style="width: 300px;height: 200px">
                 </div>
             </div>

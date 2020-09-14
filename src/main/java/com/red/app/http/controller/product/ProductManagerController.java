@@ -70,14 +70,16 @@ public class ProductManagerController {
     public String createProduct(@ModelAttribute("product") Product product, @RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         productService.save(product);
         for (MultipartFile file : files) {
-            Image image = new Image();
-            image.setProduct(product);
-            imageService.save(image);
-            String nameFile = file.getOriginalFilename();
-            String extension = nameFile.substring(nameFile.lastIndexOf("."));
-            image.setFileName(hashids.encode(image.getId()) + extension);
-            imageService.save(image);
-            storage.putFile(file, "upload", image.getFileName());
+            if (file.getSize() > 0){
+                Image image = new Image();
+                image.setProduct(product);
+                imageService.save(image);
+                String nameFile = file.getOriginalFilename();
+                String extension = nameFile.substring(nameFile.lastIndexOf("."));
+                image.setFileName(hashids.encode(image.getId()) + extension);
+                imageService.save(image);
+                storage.putFile(file, "upload", image.getFileName());
+            }
         }
 
         redirectAttributes.addFlashAttribute("create_done", true);
