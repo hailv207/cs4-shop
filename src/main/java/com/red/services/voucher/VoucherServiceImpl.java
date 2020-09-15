@@ -23,6 +23,11 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
+    public Optional<Voucher> findByCode(String code) {
+        return voucherRepository.findByCode(code);
+    }
+
+    @Override
     public Iterable<Voucher> findAll() {
         return voucherRepository.findAll();
     }

@@ -9,13 +9,15 @@ import java.util.Set;
 @Table(name = "categories")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
+    @Lob
     private String description;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private Set<Product> products = new HashSet<>();
 

@@ -69,8 +69,6 @@ public class LoginController {
 	private String getErrorMessage(HttpServletRequest request, FormLogin formLogin){
 		Locale locale = RequestContextUtils.getLocale(request);
 
-		System.out.println(locale);
-
 		HttpSession session = request.getSession(false);
 		String errorMessage = null;
 		AuthenticationException exception = null;

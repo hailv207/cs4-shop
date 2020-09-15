@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{site.card.checkout}"></title>
+</head>
+<body>
+<section layout:fragment="content" class="container-xl mt-100 mb-5 p-0">
+    <form th:action="@{/checkout}" method="POST" th:object="${formCheckout}">
+        <div class="row">
+            <div class="col-lg-4 mb-3">
+                <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+                    <div class="card-title text-uppercase">THÔNG TIN GIAO HÀNG</div>
+                    <div class="form-group mt-3">
+                        <label for="fullname">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" th:field="*{fullname}" th:classappend="${#fields.hasErrors('fullname') ? 'is-invalid' : ''}" required />
+                        <span class="invalid-feedback" role="alert" th:if="${#fields.hasErrors('fullname')}">
+							<strong th:errors="*{fullname}"></strong>
+						</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Điện thoại</label>
+                        <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}" th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}" required />
+                        <span class="invalid-feedback" role="alert" th:if="${#fields.hasErrors('phone')}">
+							<strong th:errors="*{phone}"></strong>
+						</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address" th:field="*{address}" th:classappend="${#fields.hasErrors('address') ? 'is-invalid' : ''}" required />
+                        <span class="invalid-feedback" role="alert" th:if="${#fields.hasErrors('address')}">
+							<strong th:errors="*{address}"></strong>
+						</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 mb-3">
+                <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+                    <div class="card-title text-uppercase">THÔNG TIN HÓA ĐƠN</div>
+                    <div>
+                        <table class="table table-bordered font-weight-bold small">
+                            <thead>
+                            <tr>
+                                <td class="align-middle">SẢN PHẨM</td>
+                                <td class="align-middle text-center">GIÁ</td>
+                                <td class="align-middle text-center">SL</td>
+                                <td class="align-middle text-center">TỔNG</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item: ${cart}">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="thumb_p" th:styleappend="'background-image: url(' + ${@imageServiceImpl.getThumbnail(item.getProduct())} + ');'"></div>
+                                        <div class="ml-3 font-weight-bolder" th:text="${item.getProduct().getName()}"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center" th:text="${@appFormatter.currencyFormat(item.getProduct().getPrice())}"></td>
+                                <td class="align-middle text-center" th:text="${item.getQuantity()}"></td>
+                                <td class="align-middle text-center" th:text="${@appFormatter.currencyFormat(item.getPrice())}"></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="2" class="align-middle text-center">TỔNG</td>
+                                <td class="font-weight-bolder align-middle text-center" th:text="${@cartManager.getQuantity()}"></td>
+                                <td class="font-weight-bolder align-middle text-center" th:text="${@appFormatter.currencyFormat(@cartManager.getPrice())}"></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="form-group m-0">
+                        <label for="voucher">Mã giảm giá</label>
+                        <input type="text" class="form-control" id="voucher" name="voucher" th:field="*{voucher}" th:classappend="${#fields.hasErrors('voucher') ? 'is-invalid' : ''}" />
+                        <span class="invalid-feedback" role="alert" th:if="${#fields.hasErrors('voucher')}">
+							<strong th:errors="*{voucher}"></strong>
+						</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-success mr-3">Thanh toán</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

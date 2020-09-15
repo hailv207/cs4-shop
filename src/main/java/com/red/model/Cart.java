@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Table(name="carts")
 public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
@@ -20,7 +20,7 @@ public class Cart {
     private String paymentMedthod;
     private LocalDateTime date;
 
-    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "voucer_id", referencedColumnName = "id")
     private Voucher voucher;
 
@@ -83,5 +83,11 @@ public class Cart {
         this.date = date;
     }
 
+    public Voucher getVoucher() {
+        return voucher;
+    }
 
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
 }

@@ -7,14 +7,14 @@ import javax.persistence.*;
 public class CartItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id",referencedColumnName = "id",nullable = false)
     private Cart cart;
 
-    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id",referencedColumnName = "id",nullable = false)
     private Product product;
 
@@ -63,5 +63,10 @@ public class CartItem {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public Long getTotal()
+    {
+        return this.price + this.quantity;
     }
 }

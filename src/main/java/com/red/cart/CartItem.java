@@ -4,7 +4,7 @@ import com.red.model.Product;
 
 public class CartItem {
     private Product product;
-    private int quantity;
+    private Integer quantity;
 
     public CartItem(){
     }
@@ -14,12 +14,20 @@ public class CartItem {
         this.quantity = 1;
     }
 
-    public void plus(){
-        this.quantity++;
+    public Integer plus(){
+        this.quantity = ++this.quantity;
+        if (this.quantity > product.getQuantity()){
+            this.quantity = product.getQuantity();
+        }
+        return this.quantity;
     }
 
-    public void munus(){
-        this.quantity--;
+    public Integer minus(){
+        this.quantity = --this.quantity;
+        if (this.quantity < 1){
+            this.quantity = 1;
+        }
+        return this.quantity;
     }
 
     public Product getProduct() {
@@ -30,11 +38,15 @@ public class CartItem {
         this.product = product;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getPrice(){
+        return getQuantity() * product.getPrice();
     }
 }
