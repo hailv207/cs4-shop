@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout_users.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Xem lại hóa đơn</title>
+</head>
+<body>
+<section layout:fragment="content" class="container-xl mt-100 mb-5 p-0">
+    <div class="row">
+        <div class="col-lg-4 mb-3">
+            <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+                <div class="card-title text-uppercase">THÔNG TIN GIAO HÀNG</div>
+                <div class="form-group mt-3">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" class="form-control" id="fullname" name="fullname"
+                           th:value="${cart.getCustomerName()}" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Điện thoại</label>
+                    <input type="text" class="form-control" id="phone" name="phone" th:value="${cart.getPhone()}"
+                           disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" class="form-control" id="address" name="address" th:value="${cart.getAddress()}"
+                           disabled/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 mb-3">
+            <div class="card mb-2" style="padding: 15px 15px 0px 15px;">
+                <div class="card-title text-uppercase">THÔNG TIN HÓA ĐƠN</div>
+                <div>
+                    <table class="table table-bordered font-weight-bold small">
+                        <thead>
+                        <tr>
+                            <td class="align-middle">SẢN PHẨM</td>
+                            <td class="align-middle text-center">GIÁ</td>
+                            <td class="align-middle text-center">SL</td>
+                            <td class="align-middle text-center">TỔNG</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item: ${cartItems}">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="thumb_p"
+                                         th:styleappend="'background-image: url(' + ${@imageServiceImpl.getThumbnail(item.getProduct())} + ');'"></div>
+                                    <div class="ml-3 font-weight-bolder" th:text="${item.getProduct().getName()}"></div>
+                                </div>
+                            </td>
+                            <td class="align-middle text-center"
+                                th:text="${@appFormatter.currencyFormat(item.getPrice())}"></td>
+                            <td class="align-middle text-center" th:text="${item.getQuantity()}"></td>
+                            <td class="align-middle text-center"
+                                th:text="${@appFormatter.currencyFormat(item.getTotal())}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2" class="align-middle text-center">TỔNG</td>
+                            <td class="font-weight-bolder align-middle text-center"
+                                th:text="${quantity}"></td>
+                            <td class="font-weight-bolder align-middle text-center"
+                                th:text="${@appFormatter.currencyFormat(price)}"></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-2" th:if="${cart.getVoucher() != null}">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td class="align-middle text-center">Mã giảm giá</td>
+                        <td class="align-middle text-center"
+                            th:text="${cart.getVoucher().getCode()}"></td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle text-center">Trị giá</td>
+                        <td class="align-middle text-center"
+                            th:text="${@appFormatter.currencyFormat(cart.getVoucher().getDiscount())}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered font-weight-bold">
+                    <tbody>
+                    <tr>
+                        <td class="align-middle text-center">THÀNH TIỀN</td>
+                        <td class="align-middle text-center"
+                            th:text="${@appFormatter.currencyFormat(price - cart.getVoucher().getDiscount())}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

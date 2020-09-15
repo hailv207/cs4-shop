@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
 
 @Component
 public class CartManager {
@@ -43,5 +44,30 @@ public class CartManager {
     public boolean check(Product product){
         Cart cart = getCart();
         return cart.check(product);
+    }
+
+    public boolean check(Long id){
+        Cart cart = getCart();
+        return cart.check(id);
+    }
+
+    public int size(){
+        Cart cart = getCart();
+        return cart.size();
+    }
+
+    public CartItem getItem(Long id){
+        Cart cart = getCart();
+        return cart.getCart().get(id);
+    }
+
+    public Long getPrice(){
+        Cart cart = getCart();
+        return cart.getPrice();
+    }
+
+    public Long getQuantity(){
+        Cart cart = getCart();
+        return cart.getQuantity();
     }
 }

@@ -739,9 +739,9 @@ Top Navbar CSS
   top: -2px;
   right: -7px;
   display: block;
-  width: 15px;
+  min-width: 15px;
   height: 15px;
-  border-radius: 50%;
+  border-radius: 50px;
   font-size: 9px;
   line-height: 12px;
 }
