@@ -33,8 +33,10 @@
             <li class="nav-item dropdown language-switch-nav-item">
                 <div class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
                      aria-expanded="false">
-                    <img src="assets/img/us-flag.jpg" alt="image">
-                    <span>English <i class='bx bx-chevron-down'></i></span>
+                    <img th:src="${@language.getCurrentIcon(#httpServletRequest)}" alt="image" />
+                    <span>
+                        <th:block th:text="${@language.getCurrentName(#httpServletRequest)}"></th:block>
+                        <i class='bx bx-chevron-down'></i></span>
                 </div>
 
                 <div class="dropdown-menu">
@@ -44,7 +46,7 @@
                     </a>
                     <a th:href="@{?lang=vi}" class="dropdown-item d-flex justify-content-between align-items-center">
                         <span>Tiếng Việt</span>
-                        <img th:src="@{assets/img/vi-flag.png}" alt="flag">
+                        <img th:src="@{/assets/img/vi-flag.png}" alt="flag">
                     </a>
                 </div>
             </li>
@@ -54,14 +56,14 @@
                    aria-expanded="false">
                     <div class="menu-profile">
                         <span class="name" th:text="${@auth.user().getFirstName()}"></span>
-                        <img src="/" class="rounded-circle" alt="image">
+                        <img src="/assets/img/user1.jpg" class="rounded-circle" alt="image">
                     </div>
                 </a>
 
                 <div class="dropdown-menu">
                     <div class="dropdown-header d-flex flex-column align-items-center">
                         <div class="figure mb-3">
-                            <img src="/" class="rounded-circle" alt="image">
+                            <img src="/assets/img/user1.jpg" class="rounded-circle" alt="image">
                         </div>
                         <div class="info text-center">
                             <span class="name"
